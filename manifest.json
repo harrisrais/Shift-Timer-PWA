@@ -1,0 +1,10 @@
+{
+  "name": "Shift Timer",
+  "short_name": "Shift Timer",
+  "description": "A simple personal shift time calculator.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#111827",
+  "icons": []
+}
