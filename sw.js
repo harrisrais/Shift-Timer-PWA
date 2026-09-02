@@ -1,4 +1,4 @@
-const CACHE_NAME = "shift-timer-v2";
+const CACHE_NAME = "shift-timer-v4";
 
 const FILES_TO_CACHE = [
     "./",
