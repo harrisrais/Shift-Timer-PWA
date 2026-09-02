@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shift Timer</title>
+</head>
+
+<body>
+
+    <h1>Shift Timer</h1>
+
+    <label>
+        Check-in:
+        <input type="time" id="checkIn">
+    </label>
+
+    <br><br>
+
+    <label>
+        Shift duration:
+        <input type="time" id="shiftDuration" value="08:30">
+    </label>
+
+    <br><br>
+
+    <label>
+        Break:
+        <input type="time" id="breakDuration" value="00:00">
+    </label>
+
+    <br><br>
+
+    <button onclick="calculate()">Calculate</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function calculate() {
+            const checkIn = document.getElementById("checkIn").value;
+            const shift = document.getElementById("shiftDuration").value;
+            const breakTime = document.getElementById("breakDuration").value;
+
+            if (!checkIn) {
+                alert("Please enter your check-in time.");
+                return;
+            }
+
+            const [startHour, startMinute] = checkIn.split(":").map(Number);
+            const [shiftHour, shiftMinute] = shift.split(":").map(Number);
+            const [breakHour, breakMinute] = breakTime.split(":").map(Number);
+
+            let totalMinutes =
+                startHour * 60 +
+                startMinute +
+                shiftHour * 60 +
+                shiftMinute +
+                breakHour * 60 +
+                breakMinute;
+
+            const endHour = Math.floor(totalMinutes / 60) % 24;
+            const endMinute = totalMinutes % 60;
+
+            const end = new Date();
+            end.setHours(endHour, endMinute, 0);
+
+            document.getElementById("result").textContent =
+                "Your shift ends at " +
+                end.toLocaleTimeString([], {
+                    hour: "numeric",
+                    minute: "2-digit"
+                });
+        }
+    </script>
+
+</body>
+</html>
