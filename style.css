@@ -1,0 +1,496 @@
+:root {
+    --background: #f1f5f9;
+    --card: #ffffff;
+
+    --text: #0f172a;
+    --muted: #64748b;
+
+    --border: #e2e8f0;
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+
+    --success: #16a34a;
+    --success-light: #dcfce7;
+
+    --shadow:
+        0 20px 50px rgba(15, 23, 42, 0.08);
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #dbeafe 0,
+            transparent 30%
+        ),
+        var(--background);
+
+    color: var(--text);
+
+    display: flex;
+    justify-content: center;
+
+    padding: 32px 16px;
+}
+
+
+.app {
+    width: 100%;
+    max-width: 560px;
+}
+
+
+/* Header */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.brand-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 12px;
+
+    background: var(--text);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+}
+
+
+.brand h1 {
+    margin: 0;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    letter-spacing: -0.02em;
+}
+
+
+.brand p {
+    margin: 2px 0 0;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+
+.status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #94a3b8;
+}
+
+
+.status.active {
+    color: var(--success);
+}
+
+
+.status.active .status-dot {
+    background: var(--success);
+
+    box-shadow:
+        0 0 0 4px var(--success-light);
+}
+
+
+/* Card */
+
+.card {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+    padding: 28px;
+
+    box-shadow: var(--shadow);
+}
+
+
+.card-header {
+    margin-bottom: 28px;
+}
+
+
+.eyebrow {
+    margin: 0 0 6px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 0.1em;
+}
+
+
+.card-header h2 {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    letter-spacing: -0.02em;
+}
+
+
+/* Inputs */
+
+.checkin-section,
+.shift-section {
+    margin-bottom: 22px;
+}
+
+
+label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--text);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+.time-input-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+
+input[type="time"] {
+    width: 100%;
+
+    min-height: 48px;
+
+    padding: 0 14px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    background: #f8fafc;
+
+    color: var(--text);
+
+    font-size: 16px;
+    font-weight: 600;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+
+input[type="time"]:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+
+.secondary-button {
+    flex-shrink: 0;
+
+    padding: 0 16px;
+
+    border: 0;
+
+    border-radius: 12px;
+
+    background: #eff6ff;
+
+    color: var(--primary);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.1s;
+}
+
+
+.secondary-button:hover {
+    background: #dbeafe;
+}
+
+
+.secondary-button:active {
+    transform: scale(0.97);
+}
+
+
+.duration-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.duration-wrapper input {
+    max-width: 180px;
+}
+
+
+.included-text {
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+
+/* Result */
+
+.result {
+    margin-top: 30px;
+
+    padding: 28px 20px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fafc
+        );
+
+    border: 1px solid #dbeafe;
+}
+
+
+.end-time {
+    margin-top: 4px;
+
+    color: var(--text);
+
+    font-size: clamp(42px, 10vw, 64px);
+
+    line-height: 1;
+
+    font-weight: 800;
+
+    letter-spacing: -0.05em;
+}
+
+
+.remaining {
+    margin-top: 12px;
+
+    color: var(--primary);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* Progress */
+
+.progress-section {
+    margin-top: 26px;
+}
+
+
+.progress-labels {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+
+.progress-track {
+    width: 100%;
+    height: 8px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #e2e8f0;
+}
+
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    transition: width 0.5s ease;
+}
+
+
+/* Buttons */
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 24px;
+}
+
+
+.reset-button {
+    border: 0;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.reset-button:hover {
+    color: var(--text);
+}
+
+
+/* Footer */
+
+footer {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    margin-top: 18px;
+
+    color: #94a3b8;
+
+    font-size: 11px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 20px 12px;
+    }
+
+
+    .header {
+        align-items: flex-start;
+    }
+
+
+    .status {
+        margin-top: 8px;
+    }
+
+
+    .card {
+        padding: 22px 18px;
+
+        border-radius: 20px;
+    }
+
+
+    .time-input-wrapper {
+        flex-direction: column;
+    }
+
+
+    .secondary-button {
+        min-height: 44px;
+    }
+
+
+    .duration-wrapper {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .duration-wrapper input {
+        max-width: none;
+    }
+
+
+    .end-time {
+        font-size: 48px;
+    }
+}
