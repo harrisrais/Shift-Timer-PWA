@@ -1,183 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
-    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="theme-color"
-        content="#0f172a"
-    >
+    <meta name="theme-color" content="#0f172a" />
 
     <title>Shift Timer</title>
 
-    <link rel="manifest" href="./manifest.json">
-    <link rel="stylesheet" href="./style.css">
-</head>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
 
-<body>
-
+  <body>
     <main class="app">
+      <!-- Header -->
+      <header class="header">
+        <div class="brand">
+          <div class="brand-icon">
+            <span>◷</span>
+          </div>
 
-        <!-- Header -->
-        <header class="header">
+          <div>
+            <h1>Shift Timer</h1>
+            <p>Track your workday</p>
+          </div>
+        </div>
 
-            <div class="brand">
-                <div class="brand-icon">
-                    <span>◷</span>
-                </div>
+        <div class="status">
+          <span class="status-dot"></span>
+          <span id="statusText">Not checked in</span>
+        </div>
+      </header>
 
-                <div>
-                    <h1>Shift Timer</h1>
-                    <p>Track your workday</p>
-                </div>
-            </div>
+      <!-- Main Card -->
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <p class="eyebrow">TODAY</p>
+            <h2 id="currentDate">Wednesday, September 2</h2>
+          </div>
+        </div>
 
-            <div class="status">
-                <span class="status-dot"></span>
-                <span id="statusText">Not checked in</span>
-            </div>
+        <!-- Check-in -->
+        <div class="checkin-section">
+          <label for="checkIn"> Check-in time </label>
 
-        </header>
+          <div class="time-input-wrapper">
+            <input type="time" id="checkIn" />
 
+            <button id="checkInNow" class="secondary-button">
+              Check In Now
+            </button>
+          </div>
+        </div>
 
-        <!-- Main Card -->
-        <section class="card">
+        <!-- Shift Duration -->
+        <div class="shift-section">
+          <label for="shiftDuration"> Shift duration </label>
 
-            <div class="card-header">
-                <div>
-                    <p class="eyebrow">TODAY</p>
-                    <h2 id="currentDate">Wednesday, September 2</h2>
-                </div>
-            </div>
+          <div class="duration-wrapper">
+            <input type="time" id="shiftDuration" value="08:30" />
 
+            <span class="included-text"> Break included </span>
+          </div>
+        </div>
 
-            <!-- Check-in -->
-            <div class="checkin-section">
+        <!-- Result -->
+        <div class="result">
+          <p class="eyebrow">SHIFT ENDS AT</p>
 
-                <label for="checkIn">
-                    Check-in time
-                </label>
+          <div class="end-time" id="endTime">--:--</div>
 
-                <div class="time-input-wrapper">
+          <div class="remaining" id="remaining">
+            Check in to start your timer
+          </div>
+        </div>
 
-                    <input
-                        type="time"
-                        id="checkIn"
-                    >
+        <!-- Progress -->
+        <div class="progress-section">
+          <div class="progress-labels">
+            <span id="startLabel">--:--</span>
 
-                    <button
-                        id="checkInNow"
-                        class="secondary-button"
-                    >
-                        Check In Now
-                    </button>
+            <span id="progressPercent"> 0% </span>
 
-                </div>
+            <span id="endLabel">--:--</span>
+          </div>
 
-            </div>
+          <div class="progress-track">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
 
+        <!-- Actions -->
+        <div class="actions">
+          <button id="resetButton" class="reset-button">Reset</button>
+        </div>
+      </section>
 
-            <!-- Shift Duration -->
-            <div class="shift-section">
-
-                <label for="shiftDuration">
-                    Shift duration
-                </label>
-
-                <div class="duration-wrapper">
-
-                    <input
-                        type="time"
-                        id="shiftDuration"
-                        value="08:30"
-                    >
-
-                    <span class="included-text">
-                        Break included
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- Result -->
-            <div class="result">
-
-                <p class="eyebrow">SHIFT ENDS AT</p>
-
-                <div
-                    class="end-time"
-                    id="endTime"
-                >
-                    --:--
-                </div>
-
-                <div
-                    class="remaining"
-                    id="remaining"
-                >
-                    Check in to start your timer
-                </div>
-
-            </div>
-
-
-            <!-- Progress -->
-            <div class="progress-section">
-
-                <div class="progress-labels">
-                    <span id="startLabel">--:--</span>
-
-                    <span id="progressPercent">
-                        0%
-                    </span>
-
-                    <span id="endLabel">--:--</span>
-                </div>
-
-                <div class="progress-track">
-                    <div
-                        class="progress-bar"
-                        id="progressBar"
-                    ></div>
-                </div>
-
-            </div>
-
-
-            <!-- Actions -->
-            <div class="actions">
-
-                <button
-                    id="resetButton"
-                    class="reset-button"
-                >
-                    Reset
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <!-- Footer -->
-        <footer>
-            <span>Shift Timer</span>
-            <span>•</span>
-            <span>8h 30m shift</span>
-        </footer>
-
+      <!-- Footer -->
+      <footer>
+        <span>Shift Timer</span>
+        <span>•</span>
+        <span>8h 30m shift</span>
+      </footer>
     </main>
 
+    <!-- Firebase App (Core) -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import {
+        getFirestore,
+        doc,
+        setDoc,
+        onSnapshot,
+      } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT_ID.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Make db accessible globally or handle logic within ES modules
+      window.db = db;
+      window.firestoreTools = { doc, setDoc, onSnapshot };
+    </script>
 
     <script src="./app.js"></script>
-
-</body>
+  </body>
 </html>

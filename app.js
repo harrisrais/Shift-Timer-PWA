@@ -261,17 +261,28 @@ checkInNowButton.addEventListener(
 |--------------------------------------------------------------------------
 */
 
-function saveSettings() {
+// Replace saveSettings() in app.js
+async function saveSettings() {
+    const checkIn = checkInInput.value;
+    const shiftDuration = shiftDurationInput.value;
 
-    localStorage.setItem(
-        "shiftCheckIn",
-        checkInInput.value
-    );
+    // Save locally as a fallback
+    localStorage.setItem("shiftCheckIn", checkIn);
+    localStorage.setItem("shiftDuration", shiftDuration);
 
-    localStorage.setItem(
-        "shiftDuration",
-        shiftDurationInput.value
-    );
+    // Save to Firestore (assuming document path "shifts/user123")
+    if (window.db) {
+        try {
+            const { doc, setDoc } = window.firestoreTools;
+            await setDoc(doc(window.db, "shifts", "user123"), {
+                checkIn,
+                shiftDuration,
+                updatedAt: new Date()
+            });
+        } catch (error) {
+            console.error("Error saving to Firebase:", error);
+        }
+    }
 }
 
 
@@ -281,25 +292,23 @@ function saveSettings() {
 |--------------------------------------------------------------------------
 */
 
-function loadSettings() {
+// Listen for changes from Firebase in real-time across devices
+function subscribeToShiftData() {
+    if (!window.db) return;
 
-    const savedCheckIn =
-        localStorage.getItem("shiftCheckIn");
-
-    const savedDuration =
-        localStorage.getItem("shiftDuration");
-
-
-    if (savedCheckIn) {
-        checkInInput.value =
-            savedCheckIn;
-    }
-
-
-    if (savedDuration) {
-        shiftDurationInput.value =
-            savedDuration;
-    }
+    const { doc, onSnapshot } = window.firestoreTools;
+    
+    onSnapshot(doc(window.db, "shifts", "user123"), (docSnap) => {
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            checkInInput.value = data.checkIn || "";
+            shiftDurationInput.value = data.shiftDuration || "08:30";
+            updateTimer();
+        } else {
+            // Fall back to localStorage if document doesn't exist
+            loadSettings();
+        }
+    });
 }
 
 
@@ -309,25 +318,23 @@ function loadSettings() {
 |--------------------------------------------------------------------------
 */
 
-resetButton.addEventListener(
-    "click",
-    () => {
+resetButton.addEventListener("click", async () => {
+    checkInInput.value = "";
+    shiftDurationInput.value = "08:30";
 
-        checkInInput.value = "";
+    localStorage.removeItem("shiftCheckIn");
+    localStorage.removeItem("shiftDuration");
 
-        shiftDurationInput.value = "08:30";
-
-        localStorage.removeItem(
-            "shiftCheckIn"
-        );
-
-        localStorage.removeItem(
-            "shiftDuration"
-        );
-
-        updateTimer();
+    if (window.db) {
+        const { doc, setDoc } = window.firestoreTools;
+        await setDoc(doc(window.db, "shifts", "user123"), {
+            checkIn: "",
+            shiftDuration: "08:30"
+        });
     }
-);
+
+    updateTimer();
+});
 
 
 /*
