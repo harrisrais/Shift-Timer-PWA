@@ -282,18 +282,12 @@ async function saveSettings() {
 
             // IMPORTANT:
             // Each user/device writes to its own document.
-            await setDoc(
-                doc(
-                    window.db,
-                    "shifts",
-                    currentUserId
-                ),
-                {
-                    checkIn,
-                    shiftDuration,
-                    updatedAt: new Date().toISOString()
-                }
-            );
+            await setDoc(doc(window.db, "shifts", currentUserId), {
+            checkIn,
+            shiftDuration,
+            updatedAt: new Date().toISOString()
+            }
+        );
 
             console.log(
                 "Settings saved for user:",
@@ -394,18 +388,12 @@ resetButton.addEventListener("click", async () => {
                 setDoc
             } = window.firestoreTools;
 
-            await setDoc(
-                doc(
-                    window.db,
-                    "shifts",
-                    currentUserId
-                ),
-                {
-                    checkIn: "",
-                    shiftDuration: "08:30",
-                    updatedAt: new Date().toISOString()
-                }
-            );
+            await setDoc(doc(window.db, "shifts", currentUserId), {
+            checkIn,
+            shiftDuration,
+            updatedAt: new Date().toISOString()
+            }
+        );
 
             console.log(
                 "Firestore settings reset for user:",
